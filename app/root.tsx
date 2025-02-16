@@ -1,25 +1,36 @@
-import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError, } from "@remix-run/react";
+import {
+  isRouteErrorResponse,
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useRouteError
+} from "@remix-run/react";
 import { GlobalPendingIndicator } from "@/components/global-pending-indicator";
 import { Header } from "@/components/header";
-import { ThemeSwitcherSafeHTML, ThemeSwitcherScript, } from "@/components/theme-switcher";
+import {
+  ThemeSwitcherSafeHTML,
+  ThemeSwitcherScript
+} from "@/components/theme-switcher";
 import "./globals.css";
 
 function App({ children }: { children: React.ReactNode }) {
   return (
     <ThemeSwitcherSafeHTML lang="en">
       <head>
-        <meta charSet="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <Meta/>
-        <Links/>
-        <ThemeSwitcherScript/>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+        <ThemeSwitcherScript />
       </head>
       <body>
-      <GlobalPendingIndicator/>
-      <Header/>
-      {children}
-      <ScrollRestoration/>
-      <Scripts/>
+        <GlobalPendingIndicator />
+        <Header />
+        {children}
+        <ScrollRestoration />
+        <Scripts />
       </body>
     </ThemeSwitcherSafeHTML>
   );
@@ -28,7 +39,7 @@ function App({ children }: { children: React.ReactNode }) {
 export default function Root() {
   return (
     <App>
-      <Outlet/>
+      <Outlet />
     </App>
   );
 }

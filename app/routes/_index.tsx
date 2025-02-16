@@ -1,42 +1,37 @@
-import { title } from "@/config.shared";
-import type { MetaFunction } from "@remix-run/node";
+import { json } from "@remix-run/node"
+import { useLoaderData } from "@remix-run/react"
+import { DocumentList } from "@/components/document-list"
+import { getPaginationParams } from "@/lib/pagination"
+import { prisma } from "@/db/prisma"
 
-export const meta: MetaFunction = () => {
-	return [
-		{ title: title() },
-		{ name: "description", content: "Welcome to Remix!" },
-	];
-};
+export const loader = async ({ request }: { request: Request }) => {
+  const { page, perPage, skip, take } = getPaginationParams(request)
+  
+  const [documents, totalCount] = await Promise.all([
+    prisma.document.findMany({
+      skip,
+      take,
+      orderBy: { id: 'asc' },
+      select: { id: true }
+    }),
+    prisma.document.count()
+  ])
+
+  return json({ documents, page, perPage, totalCount })
+}
 
 export default function Index() {
-	return (
-		<main className="container prose py-8">
-			<h1>Welcome to Remix</h1>
-			<ul>
-				<li>
-					<a
-						target="_blank"
-						href="https://remix.run/tutorials/blog"
-						rel="noreferrer"
-					>
-						15m Quickstart Blog Tutorial
-					</a>
-				</li>
-				<li>
-					<a
-						target="_blank"
-						href="https://remix.run/tutorials/jokes"
-						rel="noreferrer"
-					>
-						Deep Dive Jokes App Tutorial
-					</a>
-				</li>
-				<li>
-					<a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-						Remix Docs
-					</a>
-				</li>
-			</ul>
-		</main>
-	);
+  const { documents, page, perPage, totalCount } = useLoaderData<typeof loader>()
+  
+  return (
+    <div className="container py-8">
+      <h1 className="text-2xl font-bold mb-6">Documents</h1>
+      <DocumentList 
+        documents={documents}
+        page={page}
+        perPage={perPage}
+        totalCount={totalCount}
+      />
+    </div>
+  )
 }
