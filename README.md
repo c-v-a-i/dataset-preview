@@ -1,46 +1,40 @@
-# Welcome to Remix + Vite + shadcn/ui!
+# dataset-preview
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/future/vite) for details on supported features.
+for fine-tuning dataset database created by [fintuser](https://github.com/c-v-a-i/fintuser)
 
 ## Getting Started
 
-Node Server:
+## Prerequisites
 
-```sh
-npx create-remix@latest --template jacob-ebey/remix-shadcn
-```
+1. Set up `.env`.
+    ```shell
+    cp .env.example .env
+    ```
+2. Set up the correct node version.
+    ```shell
+    nvm use
+    ```
+3. Install the dependencies.
+    ```shell
+    npm install
+    ```
+4. Install prisma, then.
+    ```shell
+    npx prisma generate
+    ```
+5. Run the database.
+    ```shell
+    docker-compose up -d
+    ```
 
-Cloudflare Pages:
+Should be good to go now
 
-```shellscript
-npx create-remix@latest --template https://github.com/jacob-ebey/remix-shadcn/tree/cloudflare
-```
-
-Or for a more flushed out template with a login flow and a SQLite database backed by Drizzle ORM:
-
-Node Server:
-
-```shellscript
-npx create-remix@latest --template https://github.com/jacob-ebey/remix-shadcn/tree/drizzle
-```
-
-Cloudflare Pages:
-
-```shellscript
-npx create-remix@latest --template https://github.com/jacob-ebey/remix-shadcn/tree/drizzle-cloudflare
-```
-
-## Built in theme switcher
-
-![image](https://github.com/jacob-ebey/remix-shadcn/assets/12063586/c6ed812c-764f-46b7-af30-26284f55535c)
-
-![image](https://github.com/jacob-ebey/remix-shadcn/assets/12063586/4e378230-3b4b-4b78-8af4-096b30aacf79)
 
 ## Development
 
 Run the Vite dev server:
 
-```sh
+```shell
 npm run dev
 ```
 
@@ -48,19 +42,19 @@ npm run dev
 
 First, build your app for production:
 
-```sh
+```shell
 npm run build
 ```
 
 Setup your environment:
 
-```sh
+```shell
 NODE_ENV='production'
 ```
 
 Then run the app in production mode:
 
-```sh
+```shell
 npm start
 ```
 
